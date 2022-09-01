@@ -1,0 +1,12 @@
+﻿using System;
+
+namespace {Namespace}.Models
+{
+    /// <summary>
+    /// {DisplayName}
+    /// </summary>
+    public class {EntityName}
+    {
+        {AttributeList}
+    }
+}

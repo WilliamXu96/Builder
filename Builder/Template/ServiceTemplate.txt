@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using {Namespace}.Models;
+
+namespace {Namespace}.Service
+{
+    public class {EntityName}Service
+    {
+        public async Task<{EntityName}Dto> Get(Guid id)
+        {
+            var data = await _repository.GetAsync(id);
+            var dto = ObjectMapper.Map<{EntityName}, {EntityName}Dto>(data);
+            return dto;
+        }
+
+        public async Task<{EntityName}Dto> DataPost(CreateOrUpdate{EntityName}Dto input)
+        {
+            {EntityName} result = null;
+            if (!input.Id.HasValue)
+            {
+                input.Id = GuidGenerator.Create();
+                result = await _repository.InsertAsync(ObjectMapper.Map<CreateOrUpdate{EntityName}Dto, {EntityName}>(input));
+            }
+            else
+            {
+                var data = await _repository.GetAsync(input.Id.Value);
+                result = await _repository.UpdateAsync(ObjectMapper.Map(input, data));
+            }
+            return ObjectMapper.Map<{EntityName}, {EntityName}Dto>(result);
+        }
+
+        public async Task Delete(List<Guid> ids)
+        {
+            foreach (var item in ids)
+            {
+                await _repository.DeleteAsync(item);
+            }
+
+        }
+
+     
+        #endregion
+
+    }
+}

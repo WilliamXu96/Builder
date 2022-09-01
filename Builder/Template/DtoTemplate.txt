@@ -1,0 +1,7 @@
+﻿namespace {Namespace}.Dtos
+{
+    public class {EntityName}Dto
+    {
+        {AttributeList}
+    }
+}
