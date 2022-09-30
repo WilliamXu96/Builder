@@ -39,5 +39,12 @@ namespace Builder.Controllers
             _logger.LogInformation("ÐÂÔöBook");
             return new BookService().Create();
         }
+
+        [HttpGet]
+        [Route("code/build")]
+        public string CodeBuild()
+        {
+            return new CodeService().Build();
+        }
     }
 }
