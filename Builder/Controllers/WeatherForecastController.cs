@@ -40,11 +40,11 @@ namespace Builder.Controllers
             return new BookService().Create();
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("code/build")]
-        public string CodeBuild()
+        public string CodeBuild(BuildInputDto input)
         {
-            return new CodeService().Build();
+            return new CodeService().Build(input);
         }
     }
 }

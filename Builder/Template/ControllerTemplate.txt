@@ -1,49 +1,13 @@
-﻿using {Namespace}.{EntityName}Management;
-using {Namespace}.{EntityName}Management.Dto;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Builder.Dtos;
+using Builder.Service;
 using Microsoft.AspNetCore.Mvc;
 
-namespace {Namespace}.Controllers
+namespace Builder.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class {EntityName}Controller : ControllerBase
     {
-        private readonly I{EntityName}AppService _{EntityName}AppService;
-
-        public {EntityName}Controller(I{EntityName}AppService {EntityName}AppService)
-        {
-            _{EntityName}AppService = {EntityName}AppService;
-        }
-
-        [HttpPost]
-        [Route("data-post")]
-        public Task<{EntityName}Dto> DataPost(CreateOrUpdate{EntityName}Dto input)
-        {
-            return _{EntityName}AppService.DataPost(input);
-        }
-
-        [HttpPost]
-        [Route("delete")]
-        public Task Delete(List<Guid> ids)
-        {
-            return _{EntityName}AppService.Delete(ids);
-        }
-
-        [HttpGet]
-        [Route("{id}")]
-        public Task<{EntityName}Dto> Get(Guid id)
-        {
-            return _{EntityName}AppService.Get(id);
-        }
-
-        [HttpGet]
-        public Task<PagedResultDto<{EntityName}Dto>> GetAll(Get{EntityName}InputDto input)
-        {
-            return _{EntityName}AppService.GetAll(input);
-        }
+        
     }
 }
