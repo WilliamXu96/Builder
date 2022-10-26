@@ -10,8 +10,8 @@ namespace Builder.Service
         {
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = assembly.GetManifestResourceNames().FirstOrDefault(a => a.Contains("ModelTemplate.txt"));
-            var stream = assembly.GetManifestResourceStream(resourceName);
-            var modelTemplate = new StreamReader(stream).ReadToEnd();
+            var file = assembly.GetManifestResourceStream(resourceName);
+            var modelTemplate = new StreamReader(file).ReadToEnd();
 
             var attributes = new StringBuilder();
             foreach (var field in input.FieldInputDto)
@@ -32,7 +32,13 @@ namespace Builder.Service
 
             var parentPath = new DirectoryInfo(Environment.CurrentDirectory).FullName;
 
-            return parentPath + @"\Models";
+            using (FileStream stream = File.Open($"{parentPath}/Models/{input.EntityName}.cs", FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                byte[] by = Encoding.Default.GetBytes(modelClass);
+                stream.Write(by, 0, by.Length);
+            }
+
+            return "OK";
         }
     }
 }
